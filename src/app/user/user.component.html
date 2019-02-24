@@ -12,7 +12,7 @@
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <div class="grid">
-  <div *ngFor='let user of users | async' class="glow rounded-corners">
+  <div *ngFor='let user of users' class="glow rounded-corners">
     <a href='https://vk.com/id{{user.id}}'>
       <table>
         <tbody>

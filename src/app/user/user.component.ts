@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {User} from "../domain/user";
 import {UserService} from "./user.service";
-import {Observable} from "rxjs";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
 @Component({
@@ -10,7 +9,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: Observable<User[]>;
+  users: User[];
   @Input()
   communities: string = '';
   @Input()
@@ -24,10 +23,13 @@ export class UserComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.users = this.userService.fetchUsers(this.communities,
+    this.userService.fetchUsers(this.communities,
       {
         sex: this.gender
-      });
+      }).subscribe(users => {
+      users.forEach(console.log);
+      this.users = users;
+    });
   }
 
   sanitize(url: string): SafeUrl {

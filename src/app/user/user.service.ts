@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {User} from "../domain/user";
 import {Observable} from "rxjs";
+import {filter, map} from "rxjs/operators";
 
-const URL = "https://friend-finder-be.herokuapp.com/people";
+const URL = "http://localhost:8080/people";
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,21 @@ export class UserService {
   }
 
   fetchUsers(communities: string, peopleFilters: any): Observable<User[]> {
-    return this.http.post<User[]>(`${URL}`, {
+    const body = {
       communities: communities.split(","),
       peopleFilters: peopleFilters
-    });
+    };
+    const asyncOptions = {
+      observe: 'events' as 'body',
+      responseType: 'text' as 'json',
+      reportProgress: true
+    };
+    return this.http.post<any>(`${URL}`, body, asyncOptions)
+      .pipe(
+        filter(e => e.type === 3 && e.partialText),
+        map(e => {
+          return e.partialText.trim().split('\n') as User[];
+        })
+      )
   }
 }
