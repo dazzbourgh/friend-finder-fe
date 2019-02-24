@@ -12,7 +12,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 export class UserComponent implements OnInit {
   users: Observable<User[]>;
   @Input()
-  communities: string;
+  communities: string = '';
 
   constructor(private userService: UserService,
               private sanitizer: DomSanitizer) {

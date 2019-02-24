@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {User} from "../domain/user";
 import {Observable} from "rxjs";
 
-const URL = "https://friend-finder-be.herokuapp.com/people";
+const URL = "http://localhost:8080/people";
 
 @Injectable({
   providedIn: 'root'
