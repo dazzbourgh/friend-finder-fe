@@ -1,6 +1,14 @@
 <div>
-  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='communities' class="form-control"
-                                                                          id='communities'>
+  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='communities'
+                                                                          class="form-control narrow" id="communities">
+  <br>
+  <label class="text-large" for="gender">Gender:</label>
+  <br>
+  <select [(ngModel)]="gender" class="custom-select narrow" id="gender">
+    <option [ngValue]="1">Female</option>
+    <option [ngValue]="2">Make</option>
+  </select>
+  <br>
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <div class="grid">

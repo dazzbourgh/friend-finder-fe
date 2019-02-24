@@ -13,6 +13,8 @@ export class UserComponent implements OnInit {
   users: Observable<User[]>;
   @Input()
   communities: string = '';
+  @Input()
+  gender: number = 1;
 
   constructor(private userService: UserService,
               private sanitizer: DomSanitizer) {
@@ -22,7 +24,10 @@ export class UserComponent implements OnInit {
   }
 
   fetchUsers() {
-    this.users = this.userService.fetchUsers(this.communities);
+    this.users = this.userService.fetchUsers(this.communities,
+      {
+        sex: this.gender
+      });
   }
 
   sanitize(url: string): SafeUrl {
