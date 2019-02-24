@@ -1,0 +1,10 @@
+<label for='communities'>Communities:</label> <input id='communities' [(ngModel)]='communities'>
+<button (click)='fetchUsers()'>Find</button>
+<div *ngFor='let user of users | async'>
+  <img [src]="sanitize(user.fields['photo_400_orig'])"/>
+  <br>
+  <a href='https://vk.com/id{{user.id}}'>{{user.fields['first_name']}} {{user.fields['last_name']}}</a>
+  <br>
+  <span>City: {{user.fields['city']}}</span>
+  <br>
+</div>
