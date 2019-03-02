@@ -15,6 +15,8 @@ export class UserComponent implements OnInit {
   communities: string = '';
   @Input()
   gender: number = 1;
+  @Input()
+  city: string = '';
   private activeRequest: Subscription;
   private _progress: number = 0;
 
@@ -41,7 +43,8 @@ export class UserComponent implements OnInit {
     this.progress = 1;
     this.activeRequest = this.userService.fetchUsers(this.communities,
       {
-        sex: this.gender
+        sex: this.gender,
+        city: this.city
       }).subscribe(users => {
       if (this.userDtos.length > 0) {
         const newPercent = this.userDtos[this.userDtos.length - 1].percent;

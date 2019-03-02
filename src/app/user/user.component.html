@@ -9,6 +9,9 @@
     <option [ngValue]="2">Make</option>
   </select>
   <br>
+  <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
+                                                            class="form-control narrow" id="city">
+  <br>
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <br>
@@ -24,7 +27,7 @@
           <td>
             <img class="rounded-corners" [src]="sanitize(userDto.data.fields['photo_200'])"/></td>
           <td>
-            {{userDto.data.fields['first_name']}} {{userDto.data.fields['last_name']}}
+            <b>{{userDto.data.fields['first_name']}} {{userDto.data.fields['last_name']}}</b>
             <br>
             <span>City: {{userDto.data.fields['city']}}</span>
             <br>
