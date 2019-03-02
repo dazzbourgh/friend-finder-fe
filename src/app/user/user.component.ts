@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from "../domain/user";
+import {UserDto} from "../dto/user-dto";
 import {UserService} from "./user.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
 
@@ -9,7 +9,7 @@ import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: User[];
+  userDtos: UserDto[];
   @Input()
   communities: string = '';
   @Input()
@@ -23,12 +23,13 @@ export class UserComponent implements OnInit {
   }
 
   fetchUsers() {
+    this.userDtos = [];
     this.userService.fetchUsers(this.communities,
       {
         sex: this.gender
       }).subscribe(users => {
-      users.forEach(console.log);
-      this.users = users;
+      this.userDtos = users.filter(user => user.data);
+      console.log(JSON.stringify(this.userDtos));
     });
   }
 

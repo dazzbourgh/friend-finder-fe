@@ -12,17 +12,17 @@
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <div class="grid">
-  <div *ngFor='let user of users' class="glow rounded-corners">
-    <a href='https://vk.com/id{{user.id}}'>
+  <div *ngFor='let userDto of userDtos' class="glow rounded-corners">
+    <a href='https://vk.com/id{{userDto.data.id}}'>
       <table>
         <tbody>
         <tr>
           <td>
-            <img class="rounded-corners" [src]="sanitize(user.fields['photo_200'])"/></td>
+            <img class="rounded-corners" [src]="sanitize(userDto.data.fields['photo_200'])"/></td>
           <td>
-            {{user.fields['first_name']}} {{user.fields['last_name']}}
+            {{userDto.data.fields['first_name']}} {{userDto.data.fields['last_name']}}
             <br>
-            <span>City: {{user.fields['city']}}</span>
+            <span>City: {{userDto.data.fields['city']}}</span>
             <br>
           </td>
         </tr>
