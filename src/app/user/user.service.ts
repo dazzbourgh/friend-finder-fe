@@ -25,7 +25,7 @@ export class UserService {
       responseType: 'text' as 'json',
       reportProgress: true
     };
-    return this.http.post<any>(`${URL}`, body, asyncOptions)
+    return this.http.post<any>(URL, body, asyncOptions)
       .pipe(
         filter(e => e.type === 3 && e.partialText),
         map(e => {
