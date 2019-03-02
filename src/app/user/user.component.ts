@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {UserDto} from "../dto/user-dto";
 import {UserService} from "./user.service";
 import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -14,6 +15,16 @@ export class UserComponent implements OnInit {
   communities: string = '';
   @Input()
   gender: number = 1;
+  private activeRequest: Subscription;
+  private _progress: number = 0;
+
+  get progress(): number {
+    return this._progress;
+  }
+
+  set progress(value: number) {
+    this._progress = (value == 100) ? 0 : value;
+  }
 
   constructor(private userService: UserService,
               private sanitizer: DomSanitizer) {
@@ -23,13 +34,20 @@ export class UserComponent implements OnInit {
   }
 
   fetchUsers() {
+    if (this.activeRequest) {
+      this.activeRequest.unsubscribe();
+    }
     this.userDtos = [];
-    this.userService.fetchUsers(this.communities,
+    this.progress = 1;
+    this.activeRequest = this.userService.fetchUsers(this.communities,
       {
         sex: this.gender
       }).subscribe(users => {
+      if (this.userDtos.length > 0) {
+        const newPercent = this.userDtos[this.userDtos.length - 1].percent;
+        this.progress = (newPercent > 0) ? newPercent : this.progress;
+      }
       this.userDtos = users.filter(user => user.data);
-      console.log(JSON.stringify(this.userDtos));
     });
   }
 

@@ -11,6 +11,10 @@
   <br>
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
+<br>
+<div class="narrow rounded-corners" *ngIf="progress > 0">
+  <ngb-progressbar type="info" [value]="progress"></ngb-progressbar>
+</div>
 <div class="grid">
   <div *ngFor='let userDto of userDtos' class="glow rounded-corners">
     <a href='https://vk.com/id{{userDto.data.id}}'>
