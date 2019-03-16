@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://friend-finder-be.herokuapp.com'
+  baseUrl: 'http://94.250.249.86:7654'
 };
