@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {UserDto} from "../dto/user-dto";
-import {UserService} from "./user.service";
-import {DomSanitizer, SafeUrl} from "@angular/platform-browser";
-import {Subscription} from "rxjs";
+import { Component, Input, OnInit } from '@angular/core';
+import { UserDto } from '../dto/user-dto';
+import { UserService } from './user.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user',
@@ -18,6 +18,11 @@ export class UserComponent implements OnInit {
   @Input()
   city: string = '';
   private activeRequest: Subscription;
+
+  constructor(private userService: UserService,
+              private sanitizer: DomSanitizer) {
+  }
+
   private _progress: number = 0;
 
   get progress(): number {
@@ -26,10 +31,6 @@ export class UserComponent implements OnInit {
 
   set progress(value: number) {
     this._progress = (value == 100) ? 0 : value;
-  }
-
-  constructor(private userService: UserService,
-              private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -55,7 +56,9 @@ export class UserComponent implements OnInit {
   }
 
   sanitize(url: string): SafeUrl {
-    if (!url) return null;
+    if (!url) {
+      return null;
+    }
     return this.sanitizer.bypassSecurityTrustUrl(url.replace('"', ''));
   }
 }

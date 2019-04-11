@@ -15,8 +15,8 @@
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <br>
-<div class="narrow rounded-corners" *ngIf="progress > 0">
-  <ngb-progressbar type="info" [value]="progress"></ngb-progressbar>
+<div *ngIf="progress > 0" class="narrow rounded-corners">
+  <ngb-progressbar [value]="progress" type="info"></ngb-progressbar>
 </div>
 <div class="grid">
   <div *ngFor='let userDto of userDtos' class="glow rounded-corners">
@@ -25,7 +25,7 @@
         <tbody>
         <tr>
           <td>
-            <img class="rounded-corners" [src]="sanitize(userDto.data.fields['photo_200'])"/></td>
+            <img [src]="sanitize(userDto.data.fields['photo_200'])" class="rounded-corners"/></td>
           <td>
             <b>{{userDto.data.fields['first_name']}} {{userDto.data.fields['last_name']}}</b>
             <br>

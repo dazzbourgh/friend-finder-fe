@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {UserDto} from "../dto/user-dto";
-import {Observable} from "rxjs";
-import {filter, map} from "rxjs/operators";
-import {environment} from "../../environments/environment";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { UserDto } from '../dto/user-dto';
+import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 const URL = `${environment.baseUrl}/people`;
 
@@ -17,7 +17,7 @@ export class UserService {
 
   fetchUsers(communities: string, peopleFilters: any): Observable<UserDto[]> {
     const body = {
-      communities: communities.split(","),
+      communities: communities.split(','),
       peopleFilters: peopleFilters
     };
     const asyncOptions = {
@@ -33,6 +33,6 @@ export class UserService {
             .split('\n')
             .map(userDtoJson => JSON.parse(userDtoJson) as UserDto);
         })
-      )
+      );
   }
 }
