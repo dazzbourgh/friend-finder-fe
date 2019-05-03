@@ -47,10 +47,8 @@ export class UserComponent implements OnInit {
         sex: this.gender,
         city: this.city
       }).subscribe(users => {
-      if (this.userDtos.length > 0) {
-        const newPercent = users[this.userDtos.length - 1].percent;
-        this.progress = (newPercent > 0) ? newPercent : this.progress;
-      }
+      const newPercent = users[users.length - 1].percent;
+      this.progress = (newPercent > 0) ? newPercent : this.progress;
       this.userDtos = users.filter(user => user.data);
     });
   }
