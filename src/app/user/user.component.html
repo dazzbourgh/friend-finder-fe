@@ -1,6 +1,7 @@
 <div>
-  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='communities'
-                                                                          class="form-control narrow" id="communities">
+  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='groupIds'
+                                                                          class="form-control narrow" id="communities"
+                                                                          placeholder="Comma separated ids">
   <br>
   <label class="text-large" for="gender">Gender:</label>
   <br>
@@ -12,24 +13,27 @@
   <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
                                                             class="form-control narrow" id="city">
   <br>
+  <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom'
+                                                                   class="form-control narrow" id="ageFrom"
+                                                                   type="number">
+  <br>
+  <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo'
+                                                               class="form-control narrow" id="ageTo" type="number">
   <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
 </div>
 <br>
-<div *ngIf="progress > 0" class="narrow rounded-corners">
-  <ngb-progressbar [value]="progress" type="info"></ngb-progressbar>
-</div>
 <div class="grid">
-  <div *ngFor='let userDto of userDtos' class="glow rounded-corners">
-    <a href='https://vk.com/id{{userDto.data.id}}'>
+  <div *ngFor='let user of users' class="glow rounded-corners">
+    <a href='https://vk.com/id{{user.id}}'>
       <table>
         <tbody>
         <tr>
           <td>
-            <img [src]="sanitize(userDto.data.fields['photo_200'])" class="rounded-corners"/></td>
+            <img [src]="sanitize(user.fields['photo_200'])" class="rounded-corners"/></td>
           <td>
-            <b>{{userDto.data.fields['first_name']}} {{userDto.data.fields['last_name']}}</b>
+            <b>{{user.fields['first_name']}} {{user.fields['last_name']}}</b>
             <br>
-            <span>City: {{userDto.data.fields['city']}}</span>
+            <span>City: {{user.fields['city']}}</span>
             <br>
           </td>
         </tr>
