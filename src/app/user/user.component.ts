@@ -58,6 +58,10 @@ export class UserComponent implements OnInit {
   private getCity(city: string): string {
     //TODO: hardcoded to StP, need to add new UI for cities after
     // authorization is added
-    return '2';
+    if (city === 'Saint Petersburg') {
+      return '2';
+    } else {
+      return '1';
+    }
   }
 }
