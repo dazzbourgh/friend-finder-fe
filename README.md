@@ -1,27 +1,15 @@
-# FriendFinderFe
+# Community Intersection UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.3.
+A UI for application that finds people that are parts of all specified VK communities and whose profiles correspond to entered filters. Only publicly accessible information is used.
 
-## Development server
+## Tech
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Project uses Angular 7 and Docker for deployment.
 
-## Code scaffolding
+## Usage
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Enter IDs of communities separated by comma, fill in filter form, press "Find" and enjoy your new friends.
 
-## Build
+Example:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+![Example](https://pp.userapi.com/c850724/v850724421/12941b/Ue6wqIVoM3A.jpg)
