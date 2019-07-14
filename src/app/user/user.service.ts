@@ -20,7 +20,8 @@ export class UserService {
     const asyncOptions = {
       observe: 'events' as 'body',
       responseType: 'text' as 'json',
-      reportProgress: true
+      reportProgress: true,
+      withCredentials: true
     };
     return this.http.post<any>(URL, request, asyncOptions)
       .pipe(
