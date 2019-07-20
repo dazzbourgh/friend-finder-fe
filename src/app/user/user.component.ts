@@ -45,7 +45,7 @@ export class UserComponent implements OnInit {
           ageFrom: this.ageFrom.toString(),
           ageTo: this.ageTo.toString()
         }))
-      .subscribe(users => this.users = users);
+      .subscribe((users: User[]) => this.users = users);
   }
 
   sanitize(url: string): SafeUrl {

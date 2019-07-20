@@ -29,11 +29,11 @@
         <tbody>
         <tr>
           <td>
-            <img [src]="sanitize(user.fields['photo_200'])" class="rounded-corners"/></td>
+            <img [src]="sanitize(user.photo_200)" class="rounded-corners"/></td>
           <td>
-            <b>{{user.fields['first_name']}} {{user.fields['last_name']}}</b>
+            <b>{{user.first_name}} {{user.last_name}}</b>
             <br>
-            <span>City: {{user.fields['city']}}</span>
+            <span>City: {{user.city}}</span>
             <br>
           </td>
         </tr>
