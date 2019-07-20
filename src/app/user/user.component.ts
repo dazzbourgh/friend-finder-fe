@@ -11,7 +11,9 @@ import { BackendRequest } from '../domain/backend-request';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: User[] = [];
+  users: User[] = []
+  account: Account 
+
   @Input()
   groupIds: string = '';
   @Input()
@@ -30,6 +32,9 @@ export class UserComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.getUserInfo().subscribe((result : Account) => {
+      this.account = result
+    })
   }
 
   fetchUsers() {

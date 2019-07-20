@@ -33,4 +33,8 @@ export class UserService {
         })
       );
   }
+
+  getUserInfo() {
+    return this.http.get(URL + '/me')
+  }
 }
