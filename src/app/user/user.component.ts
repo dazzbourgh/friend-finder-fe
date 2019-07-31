@@ -11,8 +11,8 @@ import { BackendRequest } from '../domain/backend-request';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  users: User[] = []
-  account: Account 
+  users: User[] = [];
+  account: Account;
 
   @Input()
   groupIds: string = '';
