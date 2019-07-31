@@ -1,11 +1,12 @@
-export class User {
-  constructor(public id: number,
-              public first_name: string,
-              public last_name: string,
-              public sex: string,
-              public photo_400_orig: string,
-              public photo_200: string,
-              public city: string,
-              public link: string) {
-  }
+import { City } from './city';
+
+export interface User {
+  id: number,
+  first_name: string,
+  last_name: string,
+  sex: string,
+  photo_400_orig: string,
+  photo_200: string,
+  city: City,
+  link: string
 }
