@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../domain/user';
+import { Group } from '../domain/group';
 import { UserService } from './user.service';
+import { GroupService } from './group.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { BackendRequest } from '../domain/backend-request';
@@ -12,6 +14,7 @@ import { BackendRequest } from '../domain/backend-request';
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
+  groups: Group[] = [];
   account: Account;
 
   @Input()
@@ -28,12 +31,19 @@ export class UserComponent implements OnInit {
   private activeRequest: Subscription;
 
   constructor(private userService: UserService,
+              private groupService: GroupService,
               private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
     this.userService.getUserInfo().subscribe((result : Account) => {
       this.account = result
+    })
+  }
+
+  addGroup() {
+    this.groupService.getGroupInfo(this.groupIds).subscribe((result : Group) => {
+      this.groups.push(result)
     })
   }
 

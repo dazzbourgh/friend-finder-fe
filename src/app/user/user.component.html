@@ -1,47 +1,63 @@
-<div>
-  <label class="text-large">{{account?.firstName + ' ' + account?.lastName}}</label>
-</div>
-<div>
-  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='groupIds'
-                                                                          class="form-control narrow" id="communities"
-                                                                          placeholder="Comma separated ids">
+<div class="container">
+  <div>
+    <label class="text-large">{{account?.firstName + ' ' + account?.lastName}}</label>
+  </div>
+  <div>
+    <label class="text-large" for='communities'>Communities:</label> 
+
+    <div class="row row justify-content-end">
+      <div class="col-4">
+        <input [(ngModel)]='groupIds' class="form-control" id="communities" placeholder="Id or short name">
+      </div>
+      <div class="col-4">
+        <div class="text-left">
+          <button (click)='addGroup()' type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+    <div>
+        <button *ngFor='let group of groups' type="button" class="btn btn-outline-secondary mr-2" placement="bottom" ngbTooltip="Tooltip on bottom">
+            {{group.name}}
+        </button>
+    </div>
+    <br>
+    <label class="text-large" for="gender">Gender:</label>
+    <br>
+    <select [(ngModel)]="gender" class="custom-select narrow" id="gender">
+      <option [ngValue]="1">Female</option>
+      <option [ngValue]="2">Male</option>
+    </select>
+    <br>
+    <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
+                                                              class="form-control narrow" id="city">
+    <br>
+    <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom'
+                                                                    class="form-control narrow" id="ageFrom"
+                                                                    type="number">
+    <br>
+    <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo'
+                                                                class="form-control narrow" id="ageTo" type="number">
+    <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
+  </div>
   <br>
-  <label class="text-large" for="gender">Gender:</label>
-  <br>
-  <select [(ngModel)]="gender" class="custom-select narrow" id="gender">
-    <option [ngValue]="1">Female</option>
-    <option [ngValue]="2">Male</option>
-  </select>
-  <br>
-  <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
-                                                            class="form-control narrow" id="city">
-  <br>
-  <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom'
-                                                                   class="form-control narrow" id="ageFrom"
-                                                                   type="number">
-  <br>
-  <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo'
-                                                               class="form-control narrow" id="ageTo" type="number">
-  <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
-</div>
-<br>
-<div class="grid">
-  <div *ngFor='let user of users' class="glow rounded-corners">
-    <a href='https://vk.com/id{{user.id}}'>
-      <table>
-        <tbody>
-        <tr>
-          <td>
-            <img [src]="sanitize(user.photo_200)" class="rounded-corners"/></td>
-          <td>
-            <b>{{user.first_name}} {{user.last_name}}</b>
-            <br>
-            <span>City: {{user.city}}</span>
-            <br>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </a>
+  <div class="grid">
+    <div *ngFor='let user of users' class="glow rounded-corners">
+      <a href='https://vk.com/id{{user.id}}'>
+        <table>
+          <tbody>
+          <tr>
+            <td>
+              <img [src]="sanitize(user.photo_200)" class="rounded-corners"/></td>
+            <td>
+              <b>{{user.first_name}} {{user.last_name}}</b>
+              <br>
+              <span>City: {{user.city}}</span>
+              <br>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </a>
+    </div>
   </div>
 </div>
