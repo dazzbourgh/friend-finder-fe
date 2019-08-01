@@ -1,12 +1,16 @@
-import { TestBed } from '@angular/core/testing';
-
 import { GroupService } from './group.service';
+import { HttpClient } from '@angular/common/http';
+import createSpyObj = jasmine.createSpyObj;
 
 describe('GroupService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
 
-  it('should be created', () => {
-    const service: GroupService = TestBed.get(GroupService);
-    expect(service).toBeTruthy();
+  it('should call http', () => {
+    //given
+    let http = createSpyObj('http', ['get']);
+    const service: GroupService = new GroupService(http as unknown as HttpClient);
+    //when
+    service.getGroupInfo('1');
+    //then
+    expect(http.get).toHaveBeenCalled();
   });
 });
