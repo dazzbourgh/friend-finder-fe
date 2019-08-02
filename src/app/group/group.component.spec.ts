@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GroupComponent } from './group.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 describe('GroupComponent', () => {
   let component: GroupComponent;
@@ -8,9 +10,11 @@ describe('GroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GroupComponent ]
+      imports: [FormsModule],
+      declarations: [GroupComponent],
+      providers: [{provide: HttpClient, useValue: {}}]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

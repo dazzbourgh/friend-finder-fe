@@ -41,6 +41,10 @@ export class UserComponent implements OnInit {
     this.groups = groups;
   }
 
+  removeGroup(group: Group) {
+    this.groups.splice(this.groups.indexOf(group), 1);
+  }
+
   fetchUsers() {
     if (this.activeRequest) {
       this.activeRequest.unsubscribe();
