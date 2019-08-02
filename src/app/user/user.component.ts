@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../domain/user';
 import { Group } from '../domain/group';
 import { UserService } from './user.service';
-import { GroupService } from './group.service';
+import { GroupService } from '../group/group.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { BackendRequest } from '../domain/backend-request';
@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   account: Account;
 
   @Input()
-  groupIds: string = '';
+  groupId: string = '';
   @Input()
   gender: number = 1;
   @Input()
@@ -31,20 +31,28 @@ export class UserComponent implements OnInit {
   private activeRequest: Subscription;
 
   constructor(private userService: UserService,
-              private groupService: GroupService,
-              private sanitizer: DomSanitizer) {
+    private groupService: GroupService,
+    private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
-    this.userService.getUserInfo().subscribe((result : Account) => {
+    this.userService.getUserInfo().subscribe((result: Account) => {
       this.account = result
     })
   }
 
   addGroup() {
-    this.groupService.getGroupInfo(this.groupIds).subscribe((result : Group) => {
-      this.groups.push(result)
+    this.groupService.getGroupInfo(this.groupId).subscribe((result: Group) => {
+      var index = this.groups.findIndex(group => group.id == result.id)
+      if (index === -1) {
+        this.groupId = ''
+        this.groups.push(result)
+      }
     })
+  }
+
+  removeGroup(group: Group) {
+    this.groups.splice(this.groups.indexOf(group), 1);
   }
 
   fetchUsers() {
@@ -53,7 +61,7 @@ export class UserComponent implements OnInit {
     }
     this.activeRequest = this.userService.fetchUsers(
       new BackendRequest(
-        this.groupIds.split(','),
+        this.groups.map(group => String(group.id)),
         {
           sex: this.gender.toString(),
           city: this.getCity(this.city),

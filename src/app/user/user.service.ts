@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../domain/user';
 import { BackendRequest } from '../domain/backend-request';
 
-const URL = `${environment.baseUrl}/people`;
+const URL_PEOPLE = `${environment.baseUrl}/people`;
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class UserService {
       reportProgress: true,
       withCredentials: true
     };
-    return this.http.post<any>(URL, request, asyncOptions)
+    return this.http.post<any>(URL_PEOPLE, request, asyncOptions)
       .pipe(
         filter(e => e.type === 3 && e.partialText),
         map(e => {
@@ -35,6 +35,6 @@ export class UserService {
   }
 
   getUserInfo() {
-    return this.http.get(URL + '/me')
+    return this.http.get(URL_PEOPLE + '/me')
   }
 }

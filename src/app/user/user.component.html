@@ -7,7 +7,7 @@
 
     <div class="row row justify-content-end">
       <div class="col-4">
-        <input [(ngModel)]='groupIds' class="form-control" id="communities" placeholder="Id or short name">
+        <input [(ngModel)]='groupId' (keyup.enter)="addGroup()" class="form-control" id="communities" placeholder="Id or short name">
       </div>
       <div class="col-4">
         <div class="text-left">
@@ -15,10 +15,12 @@
         </div>
       </div>
     </div>
-    <div>
-        <button *ngFor='let group of groups' type="button" class="btn btn-outline-secondary mr-2" placement="bottom" ngbTooltip="Tooltip on bottom">
-            {{group.name}}
-        </button>
+    <div class="row justify-content-center">
+        <div class="col-12">
+          <button *ngFor='let group of groups' (click)='removeGroup(group)' type="button" class="btn btn-outline-secondary mr-2 mt-2" placement="bottom" ngbTooltip="{{group.description}}">
+              {{group.name}}
+          </button>
+        </div>
     </div>
     <br>
     <label class="text-large" for="gender">Gender:</label>

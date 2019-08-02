@@ -2,5 +2,9 @@
   "/people": {
     "target": "http://localhost:8080",
     "secure": true
+  },
+  "/groups": {
+    "target": "http://localhost:8080",
+    "secure": true
   }
 }
