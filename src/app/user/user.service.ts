@@ -5,7 +5,7 @@ import { environment } from '../../environments/environment';
 import { User } from '../domain/user';
 import { BackendRequest } from '../domain/backend-request';
 
-const URL = `${environment.baseUrl}/people`;
+const URL_PEOPLE = `${environment.baseUrl}/people`;
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +16,10 @@ export class UserService {
   }
 
   fetchUsers(request: BackendRequest): Observable<User[]> {
-    return this.http.post<User[]>(URL, request);
+    return this.http.post<User[]>(URL_PEOPLE, request);
   }
 
   getUserInfo() {
-    return this.http.get(URL + '/me')
+    return this.http.get(URL_PEOPLE + '/me')
   }
 }

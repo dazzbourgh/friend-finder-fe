@@ -1,47 +1,48 @@
 <div>
-  <label class="text-large">{{account?.firstName + ' ' + account?.lastName}}</label>
-</div>
-<div>
-  <label class="text-large" for='communities'>Communities:</label> <input [(ngModel)]='groupIds'
-                                                                          class="form-control narrow" id="communities"
-                                                                          placeholder="Comma separated ids">
+  <div>
+    <label class="text-large">{{account?.firstName + ' ' + account?.lastName}}</label>
+  </div>
+  <div>
+    <label class="text-large" for='communities'>Communities:</label>
+
+    <ci-group (added)="onGroupAdded($event)"></ci-group>
+
+    <br>
+    <label class="text-large" for="gender">Gender:</label>
+    <br>
+    <select [(ngModel)]="gender" class="custom-select narrow" id="gender">
+      <option [ngValue]="1">Female</option>
+      <option [ngValue]="2">Male</option>
+    </select>
+    <br>
+    <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city' class="form-control narrow" id="city">
+    <br>
+    <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom' class="form-control narrow"
+      id="ageFrom" type="number">
+    <br>
+    <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo' class="form-control narrow" id="ageTo"
+      type="number">
+    <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
+  </div>
   <br>
-  <label class="text-large" for="gender">Gender:</label>
-  <br>
-  <select [(ngModel)]="gender" class="custom-select narrow" id="gender">
-    <option [ngValue]="1">Female</option>
-    <option [ngValue]="2">Male</option>
-  </select>
-  <br>
-  <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
-                                                            class="form-control narrow" id="city">
-  <br>
-  <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom'
-                                                                   class="form-control narrow" id="ageFrom"
-                                                                   type="number">
-  <br>
-  <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo'
-                                                               class="form-control narrow" id="ageTo" type="number">
-  <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
-</div>
-<br>
-<div class="grid">
-  <div *ngFor='let user of users' class="glow rounded-corners">
-    <a href='https://vk.com/id{{user.id}}'>
-      <table>
-        <tbody>
-        <tr>
-          <td>
-            <img [src]="sanitize(user.photo_200)" class="rounded-corners"/></td>
-          <td>
-            <b>{{user.first_name}} {{user.last_name}}</b>
-            <br>
-            <span>City: {{user.city.title}}</span>
-            <br>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </a>
+  <div class="grid">
+    <div *ngFor='let user of users' class="glow rounded-corners">
+      <a href='https://vk.com/id{{user.id}}'>
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <img [src]="sanitize(user.photo_200)" class="rounded-corners" /></td>
+              <td>
+                <b>{{user.first_name}} {{user.last_name}}</b>
+                <br>
+                <span>City: {{user.city.title}}</span>
+                <br>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </a>
+    </div>
   </div>
 </div>

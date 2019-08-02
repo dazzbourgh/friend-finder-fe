@@ -1,21 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from '../domain/user';
+import { Group } from '../domain/group';
 import { UserService } from './user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { BackendRequest } from '../domain/backend-request';
 
 @Component({
-  selector: 'app-user',
+  selector: 'ci-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
+  groups: Group[] = [];
   account: Account;
 
-  @Input()
-  groupIds: string = '';
   @Input()
   gender: number = 1;
   @Input()
@@ -33,8 +33,16 @@ export class UserComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserInfo().subscribe((result : Account) => {
-      this.account = result
+      this.account = result;
     })
+  }
+
+  onGroupAdded(groups: Group[]) {
+    this.groups = groups;
+  }
+
+  removeGroup(group: Group) {
+    this.groups.splice(this.groups.indexOf(group), 1);
   }
 
   fetchUsers() {
@@ -43,7 +51,7 @@ export class UserComponent implements OnInit {
     }
     this.activeRequest = this.userService.fetchUsers(
       new BackendRequest(
-        this.groupIds.split(','),
+        this.groups.map(group => group.id.toString()),
         {
           sex: this.gender.toString(),
           city: this.getCity(this.city),
