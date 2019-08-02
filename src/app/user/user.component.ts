@@ -5,6 +5,7 @@ import { UserService } from './user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { BackendRequest } from '../domain/backend-request';
+import { Account } from '../domain/account';
 
 @Component({
   selector: 'ci-user',
