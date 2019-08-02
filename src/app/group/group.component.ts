@@ -24,5 +24,8 @@ export class GroupComponent implements OnInit {
         this.added.emit(this.groups);
       })
   }
-
+  
+  removeGroup(group: Group) {
+    this.groups.splice(this.groups.indexOf(group), 1);
+  }
 }
