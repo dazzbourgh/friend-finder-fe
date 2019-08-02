@@ -1,27 +1,12 @@
-<div class="container">
+<div>
   <div>
     <label class="text-large">{{account?.firstName + ' ' + account?.lastName}}</label>
   </div>
   <div>
-    <label class="text-large" for='communities'>Communities:</label> 
+    <label class="text-large" for='communities'>Communities:</label>
 
-    <div class="row row justify-content-end">
-      <div class="col-4">
-        <input [(ngModel)]='groupId' (keyup.enter)="addGroup()" class="form-control" id="communities" placeholder="Id or short name">
-      </div>
-      <div class="col-4">
-        <div class="text-left">
-          <button (click)='addGroup()' type="button" class="btn btn-primary">Add</button>
-        </div>
-      </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-12">
-          <button *ngFor='let group of groups' (click)='removeGroup(group)' type="button" class="btn btn-outline-secondary mr-2 mt-2" placement="bottom" ngbTooltip="{{group.description}}">
-              {{group.name}}
-          </button>
-        </div>
-    </div>
+    <ci-group (added)="onGroupAdded($event)"></ci-group>
+
     <br>
     <label class="text-large" for="gender">Gender:</label>
     <br>
@@ -30,15 +15,13 @@
       <option [ngValue]="2">Male</option>
     </select>
     <br>
-    <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city'
-                                                              class="form-control narrow" id="city">
+    <label class="text-large" for='city'>City:</label> <input [(ngModel)]='city' class="form-control narrow" id="city">
     <br>
-    <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom'
-                                                                    class="form-control narrow" id="ageFrom"
-                                                                    type="number">
+    <label class="text-large" for='ageFrom'>Age from:</label> <input [(ngModel)]='ageFrom' class="form-control narrow"
+      id="ageFrom" type="number">
     <br>
-    <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo'
-                                                                class="form-control narrow" id="ageTo" type="number">
+    <label class="text-large" for='ageTo'>Age to:</label> <input [(ngModel)]='ageTo' class="form-control narrow" id="ageTo"
+      type="number">
     <button (click)='fetchUsers()' class="btn btn-primary" id='find-button'>Find</button>
   </div>
   <br>
@@ -47,16 +30,16 @@
       <a href='https://vk.com/id{{user.id}}'>
         <table>
           <tbody>
-          <tr>
-            <td>
-              <img [src]="sanitize(user.photo_200)" class="rounded-corners"/></td>
-            <td>
-              <b>{{user.first_name}} {{user.last_name}}</b>
-              <br>
-              <span>City: {{user.city}}</span>
-              <br>
-            </td>
-          </tr>
+            <tr>
+              <td>
+                <img [src]="sanitize(user.photo_200)" class="rounded-corners" /></td>
+              <td>
+                <b>{{user.first_name}} {{user.last_name}}</b>
+                <br>
+                <span>City: {{user.city.title}}</span>
+                <br>
+              </td>
+            </tr>
           </tbody>
         </table>
       </a>
