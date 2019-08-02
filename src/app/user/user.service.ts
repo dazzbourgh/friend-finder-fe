@@ -16,7 +16,7 @@ export class UserService {
   }
 
   fetchUsers(request: BackendRequest): Observable<User[]> {
-    return this.http.post<User[]>(URL, request);
+    return this.http.post<User[]>(URL_PEOPLE, request);
   }
 
   getUserInfo() {
