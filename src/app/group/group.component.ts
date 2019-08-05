@@ -22,10 +22,12 @@ export class GroupComponent implements OnInit {
       .subscribe((group: Group) => {
         this.groups.push(group);
         this.added.emit(this.groups);
+        this.groupId = ''
       })
   }
   
   removeGroup(group: Group) {
     this.groups.splice(this.groups.indexOf(group), 1);
+    this.added.emit(this.groups);
   }
 }
