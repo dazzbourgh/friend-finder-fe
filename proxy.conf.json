@@ -1,10 +1,6 @@
 {
-  "/people": {
-    "target": "http://localhost:8080",
-    "secure": true
-  },
-  "/groups": {
-    "target": "http://localhost:8080",
+  "/v1": {
+    "target": "http://localhost:9034",
     "secure": true
   }
 }

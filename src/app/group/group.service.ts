@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Group } from '../domain/group';
 
-const URL_GROUP = `${environment.baseUrl}/groups`;
+const URL_GROUP = `${environment.baseUrl}/group`;
 
 @Injectable({
   providedIn: 'root'
